@@ -34,6 +34,8 @@ print(identity(dimension=5))
 
 # ======================= Part 2: Plotting =======================
 print('Plotting Data ...')
+from plotData import plotData
+plotData()
 """
 data = load('ex1data1.txt');
 X = data(:, 1); y = data(:, 2);
