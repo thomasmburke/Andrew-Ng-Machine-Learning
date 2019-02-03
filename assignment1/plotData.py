@@ -13,6 +13,10 @@ def loadData():
     plt.scatter(x=sampleData[:,0],y=sampleData[:,1],marker='x')
     plt.show()
 
+def getRows():
+    sampleData = np.loadtxt(fname='data/ex1data1.txt', dtype= float, delimiter=',')
+    return np.size(sampleData,axis=0)
+
 if __name__=='__main__':
     # plotData()
     loadData()
