@@ -22,10 +22,6 @@ import numpy as np
 %
 % x refers to the population size in 10,000s
 % y refers to the profit in $10,000s
-%
-
-%% Initialization
-clear ; close all; clc
 """
 # ==================== Part 1: Basic Function ====================
 # Complete warmUpExercise.m
@@ -40,20 +36,34 @@ plotData()
 m=getRows()
 print(m)
 
-#data = load('ex1data1.txt');
-#X = data(:, 1); y = data(:, 2);
-
 # =================== Part 3: Cost and Gradient descent ===================
+sampleData = np.loadtxt(fname='data/ex1data1.txt', dtype= float, delimiter=',')
+oneColumn = np.ones(shape=(m,1))
+print('ensure the shapes of the matrixes match, o/w it will be (97,1) and (97,)')
+#print('oneColumn dtype: {}'.format(oneColumn.shape))
+#print('sampleData dtype: {}'.format(sampleData[:,0].reshape(m,1).shape))
+X = np.hstack(tup=(np.ones(shape=(m,1)), sampleData[:,0].reshape(m,1)))
+#X = np.hstack([np.ones([m,1]), sampleData[:,0]])
+y = sampleData[:,1].reshape(m,1)
+#print(X)
+# Initialize fitting params
+theta = np.zeros(shape=(2,1))
+#print('theta: {}'.format(theta))
+#print('theta,T shape: {}'.format(theta.T.shape))
+#print('X shape: {}'.format(X.shape))
+# Some gradient descent settings
+iterations = 1500
+alpha = .01
+print('Testing Cost function...')
+# Compute and display initial cost
+from computeCost import compute_cost
+J = compute_cost(X, y, theta)
+print(J)
+print('Expected cost value (approx) 32.07')
+J = compute_cost(X,y,np.array([[-1],[2]]))
+print(J)
+print('Expected cost value (approx) 54.24')
 """
-X = [ones(m, 1), data(:,1)]; % Add a column of ones to x
-theta = zeros(2, 1); % initialize fitting parameters
-
-% Some gradient descent settings
-iterations = 1500;
-alpha = 0.01;
-
-fprintf('\nTesting the cost function ...\n')
-% compute and display initial cost
 J = computeCost(X, y, theta);
 fprintf('With theta = [0 ; 0]\nCost computed = %f\n', J);
 fprintf('Expected cost value (approx) 32.07\n');
