@@ -32,7 +32,7 @@ print(identity(dimension=5))
 # ======================= Part 2: Plotting =======================
 print('Plotting Data ...')
 from plotData import plotData, getRows
-plotData()
+#plotData()
 m=getRows()
 print(m)
 
@@ -40,12 +40,8 @@ print(m)
 sampleData = np.loadtxt(fname='data/ex1data1.txt', dtype= float, delimiter=',')
 oneColumn = np.ones(shape=(m,1))
 print('ensure the shapes of the matrixes match, o/w it will be (97,1) and (97,)')
-#print('oneColumn dtype: {}'.format(oneColumn.shape))
-#print('sampleData dtype: {}'.format(sampleData[:,0].reshape(m,1).shape))
 X = np.hstack(tup=(np.ones(shape=(m,1)), sampleData[:,0].reshape(m,1)))
-#X = np.hstack([np.ones([m,1]), sampleData[:,0]])
 y = sampleData[:,1].reshape(m,1)
-#print(X)
 # Initialize fitting params
 theta = np.zeros(shape=(2,1))
 #print('theta: {}'.format(theta))
@@ -56,36 +52,23 @@ iterations = 1500
 alpha = .01
 print('Testing Cost function...')
 # Compute and display initial cost
-from computeCost import compute_cost
+from computeCost import compute_cost, slow_compute_cost
 J = compute_cost(X, y, theta)
+print(J)
+J = slow_compute_cost(X,y,theta)
 print(J)
 print('Expected cost value (approx) 32.07')
 J = compute_cost(X,y,np.array([[-1],[2]]))
 print(J)
 print('Expected cost value (approx) 54.24')
+print('Running Gradient Descent...')
+from gradientDescent import gradient_descent
+j_history, theta = gradient_descent(X, y, theta, alpha, iterations)
+
+print('Theta found by gradient descent: {}'.format(theta))
+print('Expected theta values (approx):')
+print(' -3.6303\n  1.1664')
 """
-J = computeCost(X, y, theta);
-fprintf('With theta = [0 ; 0]\nCost computed = %f\n', J);
-fprintf('Expected cost value (approx) 32.07\n');
-
-% further testing of the cost function
-J = computeCost(X, y, [-1 ; 2]);
-fprintf('\nWith theta = [-1 ; 2]\nCost computed = %f\n', J);
-fprintf('Expected cost value (approx) 54.24\n');
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
-fprintf('\nRunning Gradient Descent ...\n')
-% run gradient descent
-theta = gradientDescent(X, y, theta, alpha, iterations);
-
-% print theta to screen
-fprintf('Theta found by gradient descent:\n');
-fprintf('%f\n', theta);
-fprintf('Expected theta values (approx)\n');
-fprintf(' -3.6303\n  1.1664\n\n');
-
 % Plot the linear fit
 hold on; % keep previous plot visible
 plot(X(:,2), X*theta, '-')
