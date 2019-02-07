@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 # Machine Learning Online Class - Exercise 1: Linear Regression
 """
 %  Instructions
@@ -68,9 +69,11 @@ j_history, theta = gradient_descent(X, y, theta, alpha, iterations)
 print('Theta found by gradient descent: {}'.format(theta))
 print('Expected theta values (approx):')
 print(' -3.6303\n  1.1664')
+
+# Plot the linear fit
+plt.scatter(x=X[:,1], y=np.dot(X,theta), marker='o')
+plt.show()
 """
-% Plot the linear fit
-hold on; % keep previous plot visible
 plot(X(:,2), X*theta, '-')
 legend('Training data', 'Linear regression')
 hold off % don't overlay any more plots on this figure
