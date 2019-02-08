@@ -32,21 +32,19 @@ print('Loading data ...')
 # Load Data
 data = np.loadtxt(fname='data/ex1data2.txt', dtype=float, delimiter=',')
 X = data[:, 0:2]
-y = data[:, 2]
+y = data[:, 2].reshape((len(data),1))
 m = len(y)
-print(X)
-print(y)
-
 # Print out some data points
 print('First 10 examples from the dataset: \n')
-#print(' x = {0}, y = {1} \n'.format(X[0:9,:], y[0:9,:]))
+print(' x = {0}, \n y = {1} \n'.format(X[0:9,:], y[0:9,:]))
 
 # Scale features and set them to zero mean
 print('Normalizing Features ...\n')
+from featureNormalize import feature_normalize, feature_normalize_stddev
+X_norm = feature_normalize_stddev(X)
+print(X_norm)
 """
-[X mu sigma] = featureNormalize(X);
-
-% Add intercept term to X
+# Add intercept term to X
 X = [ones(m, 1) X];
 
 

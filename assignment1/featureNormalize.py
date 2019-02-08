@@ -14,5 +14,16 @@ def feature_normalize(X):
     return X_norm
 
 
+def feature_normalize_stddev(X):
+    """
+    Summary: Feature Scaling - (x-x_avg)/(x_max-x_min)
+    Params: X (numpy matrix) - A nxm matrix where n is 2 
+        and m is the number of data points
+    Return: X_norm (numpy matrix) - a normalized X matrix
+    """
+    X_avg = np.mean(X, axis=0)
+    X_norm = (X - X_avg) / np.std(X, axis=0)
+    return X_norm
+
 if __name__=='__main__':
     pass
