@@ -71,9 +71,9 @@ print('Expected theta values (approx):')
 print(' -3.6303\n  1.1664')
 
 # Plot the linear fit
-#plt.scatter(x=X[:,1], y=np.dot(X,theta), marker='o')
-plt.scatter(x=X[:,1], y=(X @ theta), marker='o')
-#plt.show()
+plt.scatter(x=X[:,1], y=np.dot(X,theta), marker='o')
+#plt.scatter(x=X[:,1], y=(X @ theta), marker='o')
+plt.show()
 
 # Predict values for population sizes of 35,000 and 70,000
 predict1 = np.array([1, 3.5]) @ theta
@@ -110,6 +110,12 @@ ax.set_zlabel("$J(\Theta)$")
 
 #rotate for better angle
 ax.view_init(30,120)
+plt.show()
+
+plt.plot(j_history)
+plt.xlabel("Iteration")
+plt.ylabel("$J(\Theta)$")
+plt.title("Cost function using Gradient Descent")
 plt.show()
 """
 % Contour plot
