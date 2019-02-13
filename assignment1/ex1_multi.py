@@ -80,14 +80,6 @@ theta = np.zeros(shape=(3, 1))
 J_history, theta = gradient_descent(X, y, theta, alpha, iterations)
 print('j_history:\n{}'.format(J_history))
 print('theta:\n{}'.format(theta))
-"""
-# Plot the convergence graph
-figure;
-plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
-xlabel('Number of iterations');
-ylabel('Cost J');
-"""
-
 
 # Estimate the price of a 1650 sq-ft, 3 br house
 # Recall that the first column of X is all-ones. Thus, it does
@@ -114,11 +106,11 @@ plt.tight_layout()
 plt.show()
 
 
-"""
+
 # ================ Part 3: Normal Equations ================
 
-fprintf('Solving with normal equations...\n');
-
+print('Solving with normal equations...\n')
+"""
 % ====================== YOUR CODE HERE ======================
 % Instructions: The following code computes the closed form 
 %               solution for linear regression using the normal
@@ -128,32 +120,24 @@ fprintf('Solving with normal equations...\n');
 %               After doing so, you should complete this code 
 %               to predict the price of a 1650 sq-ft, 3 br house.
 %
-
-%% Load Data
-data = csvread('ex1data2.txt');
-X = data(:, 1:2);
-y = data(:, 3);
-m = length(y);
-
-% Add intercept term to X
-X = [ones(m, 1) X];
-
-% Calculate the parameters from the normal equation
-theta = normalEqn(X, y);
-
-% Display normal equation's result
-fprintf('Theta computed from the normal equations: \n');
-fprintf(' %f \n', theta);
-fprintf('\n');
-
-
-% Estimate the price of a 1650 sq-ft, 3 br house
-% ====================== YOUR CODE HERE ======================
-price = 0; % You should change this
-
-
-% ============================================================
-
-fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
-         '(using normal equations):\n $%f\n'], price);
 """
+# Load Data
+data = np.loadtxt(fname='data/ex1data2.txt', dtype=float, delimiter=',')
+X = data[:, 0:2]
+y = data[:, 2].reshape((len(data),1))
+m = len(y)
+
+# Add intercept term to X
+X = np.hstack(tup=(np.ones(shape=(m,1)), X))
+
+# Calculate the parameters from the normal equation
+from normalEqn import normal_equation
+theta = normal_equation(X, y)
+print('normal eqn theta:\n{}'.format(theta))
+
+# Estimate the price of a 1650 sq-ft, 3 br house
+# ====================== YOUR CODE HERE ======================
+inputs = np.array([1,1650,3])
+price = inputs @ theta
+print('Predicted price of a 1650 sq-ft. 3 br house(Using normal equation)...')
+print(price)
