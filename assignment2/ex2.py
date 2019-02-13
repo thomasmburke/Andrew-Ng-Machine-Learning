@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 # Load Data
 #  The first two columns contains the exam scores and the third column
 #  contains the label.
-data = np.loadtxt(fname='data/ex2data1.txt', dtype=float, delimiter=',')
+data = np.genfromtxt(fname='data/ex2data1.txt', dtype=float, delimiter=',')
 X = data[:, 0:2]
 y = data[:, 2].reshape((len(data),1))
 m = len(y)
