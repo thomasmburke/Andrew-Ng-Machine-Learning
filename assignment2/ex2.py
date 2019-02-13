@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+"""
 %% Machine Learning Online Class - Exercise 2: Logistic Regression
 %
 %  Instructions
@@ -11,44 +14,23 @@
 %     costFunction.m
 %     predict.m
 %     costFunctionReg.m
-%
-%  For this exercise, you will not need to change any code in this file,
-%  or any other files other than those mentioned above.
-%
+"""
+# Load Data
+#  The first two columns contains the exam scores and the third column
+#  contains the label.
+data = np.loadtxt(fname='data/ex2data1.txt', dtype=float, delimiter=',')
+X = data[:, 0:2]
+y = data[:, 2].reshape((len(data),1))
+m = len(y)
 
-%% Initialization
-clear ; close all; clc
+# ==================== Part 1: Plotting ====================
+#  We start the exercise by first plotting the data to understand the 
+#  the problem we are working with.
 
-%% Load Data
-%  The first two columns contains the exam scores and the third column
-%  contains the label.
-
-data = load('ex2data1.txt');
-X = data(:, [1, 2]); y = data(:, 3);
-
-%% ==================== Part 1: Plotting ====================
-%  We start the exercise by first plotting the data to understand the 
-%  the problem we are working with.
-
-fprintf(['Plotting data with + indicating (y = 1) examples and o ' ...
-         'indicating (y = 0) examples.\n']);
-
-plotData(X, y);
-
-% Put some labels 
-hold on;
-% Labels and Legend
-xlabel('Exam 1 score')
-ylabel('Exam 2 score')
-
-% Specified in plot order
-legend('Admitted', 'Not admitted')
-hold off;
-
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
-
-
+print('Plotting data with + indicating (y = 1) examples and o indicating (y = 0) examples.\n')
+from plotData import plot_data
+plot_data(X, y)
+"""
 %% ============ Part 2: Compute Cost and Gradient ============
 %  In this part of the exercise, you will implement the cost and gradient
 %  for logistic regression. You neeed to complete the code in 
@@ -146,3 +128,4 @@ p = predict(theta, X);
 
 fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
 fprintf('Expected accuracy (approx): 89.0\n');
+"""
