@@ -36,9 +36,9 @@ print (clf.intercept_, clf.coef_)
 #  We start the exercise by first plotting the data to understand the 
 #  the problem we are working with.
 
-print('Plotting data with + indicating (y = 1) examples and o indicating (y = 0) examples.\n')
-from plotData import plot_data
-plot_data(X, y)
+#print('Plotting data with + indicating (y = 1) examples and o indicating (y = 0) examples.\n')
+#from plotData import plot_data
+#plot_data(X, y)
 
 # ============ Part 2: Compute Cost and Gradient ============
 #  In this part of the exercise, you will implement the cost and gradient
@@ -82,27 +82,23 @@ from featureNormalization import feature_scaling
 #xopt = fmin_bfgs(lambda x: compute_logistic_cost(initial_theta,X, y)[0], initial_theta, lambda x: compute_logistic_cost(initial_theta, X, y)[1])
 #print(xopt)
 
-clf = LogisticRegression(fit_intercept=False, C = 1e10)
+clf = LogisticRegression(fit_intercept=False, C = 1e10, solver='lbfgs', max_iter=400)
 clf.fit(X, np.ravel(y))
 
 print (clf.intercept_, clf.coef_)
+theta = clf.coef_.T
+print('theta: {}'.format(theta))
+print('theta: {}'.format(type(theta)))
 #print weights
+
+print('Expected theta (approx):\n')
+print(' -25.161\n 0.206\n 0.201\n')
+
+
+print('Plotting data with + indicating (y = 1) examples and o indicating (y = 0) examples.\n')
+from plotData import plot_data
+plot_data(X[:,1:], y, theta)
 """
-options = optimset('GradObj', 'on', 'MaxIter', 400);
-
-%  Run fminunc to obtain the optimal theta
-%  This function will return theta and the cost 
-[theta, cost] = ...
-	fminunc(@(t)(costFunction(t, X, y)), initial_theta, options);
-
-% Print theta to screen
-fprintf('Cost at theta found by fminunc: %f\n', cost);
-fprintf('Expected cost (approx): 0.203\n');
-fprintf('theta: \n');
-fprintf(' %f \n', theta);
-fprintf('Expected theta (approx):\n');
-fprintf(' -25.161\n 0.206\n 0.201\n');
-
 % Plot Boundary
 plotDecisionBoundary(theta, X, y);
 
