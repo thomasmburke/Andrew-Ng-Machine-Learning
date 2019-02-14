@@ -99,23 +99,7 @@ print('Plotting data with + indicating (y = 1) examples and o indicating (y = 0)
 from plotData import plot_data
 plot_data(X[:,1:], y, theta)
 """
-% Plot Boundary
-plotDecisionBoundary(theta, X, y);
-
-% Put some labels 
-hold on;
-% Labels and Legend
-xlabel('Exam 1 score')
-ylabel('Exam 2 score')
-
-% Specified in plot order
-legend('Admitted', 'Not admitted')
-hold off;
-
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
-
-%% ============== Part 4: Predict and Accuracies ==============
+# ============== Part 4: Predict and Accuracies ==============
 %  After learning the parameters, you'll like to use it to predict the outcomes
 %  on unseen data. In this part, you will use the logistic regression model
 %  to predict the probability that a student with score 45 on exam 1 and 
@@ -124,17 +108,19 @@ pause;
 %  Furthermore, you will compute the training and test set accuracies of 
 %  our model.
 %
-%  Your task is to complete the code in predict.m
+%  Your task is to complete the code in predict.py
 
 %  Predict probability for a student with score 45 on exam 1 
 %  and score 85 on exam 2 
+"""
+from sigmoid import sigmoid
+z = np.dot(np.array([1,45,85]), theta) 
+prob = sigmoid(z)
+print('For a student with scores 45 and 85, we predict an admission probability of {}%'.format(prob))
+print('Expected value: 0.775 +/- 0.002')
 
-prob = sigmoid([1 45 85] * theta);
-fprintf(['For a student with scores 45 and 85, we predict an admission ' ...
-         'probability of %f\n'], prob);
-fprintf('Expected value: 0.775 +/- 0.002\n\n');
-
-% Compute accuracy on our training set
+#Compute accuracy on our training set
+"""
 p = predict(theta, X);
 
 fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
