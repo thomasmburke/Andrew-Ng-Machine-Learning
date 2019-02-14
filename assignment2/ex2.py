@@ -26,6 +26,12 @@ X = data[:, 0:2]
 y = data[:, 2].reshape((len(data),1))
 m, n = X.shape
 
+from sklearn.linear_model import LogisticRegression
+
+clf = LogisticRegression(fit_intercept=True, C = 1e10)
+clf.fit(X, np.ravel(y))
+
+print (clf.intercept_, clf.coef_)
 # ==================== Part 1: Plotting ====================
 #  We start the exercise by first plotting the data to understand the 
 #  the problem we are working with.
@@ -36,7 +42,7 @@ plot_data(X, y)
 
 # ============ Part 2: Compute Cost and Gradient ============
 #  In this part of the exercise, you will implement the cost and gradient
-#  for logistic regression. You neeed to complete the code in 
+#  for logistic regression. You need to complete the code in 
 #  costFunction.py
 #  Setup the data matrix appropriately, and add ones for the intercept term
 # Add intercept term to x and X_test
@@ -45,7 +51,7 @@ X = np.hstack(tup=(np.ones(shape=(m,1)),X))
 # Initialize fitting parameters
 initial_theta = np.zeros(shape=(n + 1, 1))
 
-from costFunction import compute_logistic_cost 
+from costFunction import compute_logistic_cost, compute_cost 
 # Compute and display initial cost and gradient
 cost, grad = compute_logistic_cost(initial_theta, X, y);
 
@@ -64,12 +70,24 @@ print('Gradient at test theta: {}'.format(grad))
 print('Expected gradients (approx):\n 0.043\n 2.566\n 2.647\n')
 
 
-"""
-%% ============= Part 3: Optimizing using fminunc  =============
-%  In this exercise, you will use a built-in function (fminunc) to find the
-%  optimal parameters theta.
 
-%  Set options for fminunc
+# ============= Part 3: Optimizing using fminunc  =============
+#  In this exercise, you will use a built-in function (fminunc) to find the
+#  optimal parameters theta.
+
+#  Set options for fminunc
+from featureNormalization import feature_scaling
+#print(feature_scaling(X))
+#from scipy.optimize import fmin_bfgs
+#xopt = fmin_bfgs(lambda x: compute_logistic_cost(initial_theta,X, y)[0], initial_theta, lambda x: compute_logistic_cost(initial_theta, X, y)[1])
+#print(xopt)
+
+clf = LogisticRegression(fit_intercept=False, C = 1e10)
+clf.fit(X, np.ravel(y))
+
+print (clf.intercept_, clf.coef_)
+#print weights
+"""
 options = optimset('GradObj', 'on', 'MaxIter', 400);
 
 %  Run fminunc to obtain the optimal theta
