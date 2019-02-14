@@ -18,10 +18,13 @@ import matplotlib.pyplot as plt
 # Load Data
 #  The first two columns contains the exam scores and the third column
 #  contains the label.
+names = ('Exam 1 Score', 'Exam 2 Score', 'Admitted')
+#data = np.genfromtxt(fname='data/ex2data1.txt', dtype=float, delimiter=',', names=names)
 data = np.genfromtxt(fname='data/ex2data1.txt', dtype=float, delimiter=',')
+print(type(data))
 X = data[:, 0:2]
 y = data[:, 2].reshape((len(data),1))
-m = len(y)
+m, n = X.shape
 
 # ==================== Part 1: Plotting ====================
 #  We start the exercise by first plotting the data to understand the 
@@ -30,44 +33,38 @@ m = len(y)
 print('Plotting data with + indicating (y = 1) examples and o indicating (y = 0) examples.\n')
 from plotData import plot_data
 plot_data(X, y)
+
+# ============ Part 2: Compute Cost and Gradient ============
+#  In this part of the exercise, you will implement the cost and gradient
+#  for logistic regression. You neeed to complete the code in 
+#  costFunction.py
+#  Setup the data matrix appropriately, and add ones for the intercept term
+# Add intercept term to x and X_test
+X = np.hstack(tup=(np.ones(shape=(m,1)),X))
+
+# Initialize fitting parameters
+initial_theta = np.zeros(shape=(n + 1, 1))
+
+from costFunction import compute_logistic_cost 
+# Compute and display initial cost and gradient
+cost, grad = compute_logistic_cost(initial_theta, X, y);
+
+print('Cost at initial theta (zeros): {}'.format(cost))
+print('Expected cost (approx): 0.693')
+print('Gradient at initial theta (zeros): {}'.format(grad))
+print('Expected gradients (approx):\n -0.1000\n -12.0092\n -11.2628\n')
+
+# Compute and display cost and gradient with non-zero theta
+test_theta = np.array([[-24],[0.2],[0.2]])
+cost, grad = compute_logistic_cost(test_theta, X, y)
+
+print('\nCost at test theta: {}'.format(cost))
+print('Expected cost (approx): 0.218')
+print('Gradient at test theta: {}'.format(grad))
+print('Expected gradients (approx):\n 0.043\n 2.566\n 2.647\n')
+
+
 """
-%% ============ Part 2: Compute Cost and Gradient ============
-%  In this part of the exercise, you will implement the cost and gradient
-%  for logistic regression. You neeed to complete the code in 
-%  costFunction.m
-
-%  Setup the data matrix appropriately, and add ones for the intercept term
-[m, n] = size(X);
-
-% Add intercept term to x and X_test
-X = [ones(m, 1) X];
-
-% Initialize fitting parameters
-initial_theta = zeros(n + 1, 1);
-
-% Compute and display initial cost and gradient
-[cost, grad] = costFunction(initial_theta, X, y);
-
-fprintf('Cost at initial theta (zeros): %f\n', cost);
-fprintf('Expected cost (approx): 0.693\n');
-fprintf('Gradient at initial theta (zeros): \n');
-fprintf(' %f \n', grad);
-fprintf('Expected gradients (approx):\n -0.1000\n -12.0092\n -11.2628\n');
-
-% Compute and display cost and gradient with non-zero theta
-test_theta = [-24; 0.2; 0.2];
-[cost, grad] = costFunction(test_theta, X, y);
-
-fprintf('\nCost at test theta: %f\n', cost);
-fprintf('Expected cost (approx): 0.218\n');
-fprintf('Gradient at test theta: \n');
-fprintf(' %f \n', grad);
-fprintf('Expected gradients (approx):\n 0.043\n 2.566\n 2.647\n');
-
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
-
-
 %% ============= Part 3: Optimizing using fminunc  =============
 %  In this exercise, you will use a built-in function (fminunc) to find the
 %  optimal parameters theta.

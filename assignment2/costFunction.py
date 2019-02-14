@@ -12,7 +12,7 @@ def compute_logistic_cost(initial_theta, X, y):
     z = np.dot(X,initial_theta)
     predictions = sigmoid(z)
     error = (-y * np.log(predictions)) - ((1-y) * np.log(1-predictions))
-    cost = -(1/m) * sum(error)
+    cost = (1/m) * sum(error)
     grad = 1/m * np.dot(X.T, (predictions - y))
     return cost[0], grad
 
