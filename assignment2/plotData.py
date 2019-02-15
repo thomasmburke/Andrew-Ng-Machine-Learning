@@ -14,3 +14,10 @@ def plot_data(X, y, theta):
     plt.ylabel("Exam 2 score")
     plt.legend(loc=0)
     plt.show()
+
+def x_plot(X, y):
+    pos , neg= (y==1), (y==0)
+    plt.scatter(X[pos[:,0],0],X[pos[:,0],1],c="r",marker="+", label='Admitted')
+    plt.scatter(X[neg[:,0],0],X[neg[:,0],1],marker="o",s=10, label='Not Admitted')
+    plt.legend(loc=0)
+    plt.show()
