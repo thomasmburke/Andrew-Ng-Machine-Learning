@@ -64,25 +64,20 @@ plt.show()
 %  digit dataset.
 %
 """
+
+# Test case for lrCostFunction
+print('Testing lrCostFunction() with regularization')
+from lrCostFunction import lrCostFunction
+theta_t = np.array([-2,-1,1,2]).reshape(4,1)
+X_t =np.array([np.linspace(0.1,1.5,15)]).reshape(3,5).T
+X_t = np.hstack((np.ones((5,1)), X_t))
+y_t = np.array([1,0,1,0,1]).reshape(5,1)
+J, grad = lrCostFunction(theta_t, X_t, y_t, 3)
+print("Cost:",J,"Expected cost: 2.534819")
+print("Gradients:\n",grad,"\nExpected gradients:\n 0.146561\n -0.548558\n 0.724722\n 1.398003")
+
+
 """
-% Test case for lrCostFunction
-fprintf('\nTesting lrCostFunction() with regularization');
-
-theta_t = [-2; -1; 1; 2];
-X_t = [ones(5,1) reshape(1:15,5,3)/10];
-y_t = ([1;0;1;0;1] >= 0.5);
-lambda_t = 3;
-[J grad] = lrCostFunction(theta_t, X_t, y_t, lambda_t);
-
-fprintf('\nCost: %f\n', J);
-fprintf('Expected cost: 2.534819\n');
-fprintf('Gradients:\n');
-fprintf(' %f \n', grad);
-fprintf('Expected gradients:\n');
-fprintf(' 0.146561\n -0.548558\n 0.724722\n 1.398003\n');
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
 %% ============ Part 2b: One-vs-All Training ============
 fprintf('\nTraining One-vs-All Logistic Regression...\n')
 
