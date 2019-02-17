@@ -1,3 +1,4 @@
+import numpy as np
 """
 %% Machine Learning Online Class - Exercise 3 | Part 1: One-vs-all
 
@@ -39,17 +40,14 @@ X = data['X']
 y = data['y']
 print('size of X: {}'.format(X.shape))
 print('size of y: {}'.format(y.shape))
-#m = size(X, 1);
+m = len(X)
+print(m)
+
+# Randomly select 100 data points to display
+sample = X[np.random.choice(X.shape[0], 100, replace=False), :]
+print(sample)
+print(sample.shape)
 """
-% Randomly select 100 data points to display
-rand_indices = randperm(m);
-sel = X(rand_indices(1:100), :);
-
-displayData(sel);
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
 %% ============ Part 2a: Vectorize Logistic Regression ============
 %  In this part of the exercise, you will reuse your logistic regression
 %  code from the last exercise. You task here is to make sure that your
