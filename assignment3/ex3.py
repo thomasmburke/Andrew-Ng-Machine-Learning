@@ -77,21 +77,23 @@ print("Cost:",J,"Expected cost: 2.534819")
 print("Gradients:\n",grad,"\nExpected gradients:\n 0.146561\n -0.548558\n 0.724722\n 1.398003")
 
 
+print(y)
+
+# ============ Part 2b: One-vs-All Training ============
+print('Training One-vs-All Logistic Regression...')
+from oneVsAll import oneVsAll
+all_theta, all_J = oneVsAll(X, y, num_labels, 0.1)
+plt.plot(all_J[0:300])
+plt.xlabel("Iteration")
+plt.ylabel("$J(\Theta)$")
+plt.title("Cost function using Gradient Descent")
+plt.show()
 """
-%% ============ Part 2b: One-vs-All Training ============
-fprintf('\nTraining One-vs-All Logistic Regression...\n')
-
-lambda = 0.1;
-[all_theta] = oneVsAll(X, y, num_labels, lambda);
-
 fprintf('Program paused. Press enter to continue.\n');
-pause;
 
-
-%% ================ Part 3: Predict for One-Vs-All ================
+# ================ Part 3: Predict for One-Vs-All ================
 
 pred = predictOneVsAll(all_theta, X);
 
 fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
-
 """
