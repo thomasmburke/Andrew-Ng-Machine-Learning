@@ -47,6 +47,14 @@ print(m)
 sample = X[np.random.choice(X.shape[0], 100, replace=False), :]
 print(sample)
 print(sample.shape)
+import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
+fig, axis = plt.subplots(10,10,figsize=(8,8))
+for i in range(10):
+    for j in range(10):
+        axis[i,j].imshow(X[np.random.randint(0,5001),:].reshape(20,20,order="F"), cmap="hot") #reshape back to 20 pixel by 20 pixel
+        axis[i,j].axis("off")
+plt.show()
 """
 %% ============ Part 2a: Vectorize Logistic Regression ============
 %  In this part of the exercise, you will reuse your logistic regression
@@ -55,7 +63,8 @@ print(sample.shape)
 %  that, you will implement one-vs-all classification for the handwritten
 %  digit dataset.
 %
-
+"""
+"""
 % Test case for lrCostFunction
 fprintf('\nTesting lrCostFunction() with regularization');
 
