@@ -54,7 +54,7 @@ for i in range(10):
     for j in range(10):
         axis[i,j].imshow(X[np.random.randint(0,5001),:].reshape(20,20,order="F"), cmap="hot") #reshape back to 20 pixel by 20 pixel
         axis[i,j].axis("off")
-plt.show()
+#plt.show()
 """
 %% ============ Part 2a: Vectorize Logistic Regression ============
 %  In this part of the exercise, you will reuse your logistic regression
@@ -87,13 +87,10 @@ plt.plot(all_J[0:300])
 plt.xlabel("Iteration")
 plt.ylabel("$J(\Theta)$")
 plt.title("Cost function using Gradient Descent")
-plt.show()
-"""
-fprintf('Program paused. Press enter to continue.\n');
+#plt.show()
+
 
 # ================ Part 3: Predict for One-Vs-All ================
-
-pred = predictOneVsAll(all_theta, X);
-
-fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
-"""
+from predictOneVsAll import predictOneVsAll
+pred = predictOneVsAll(all_theta, X)
+print("Training Set Accuracy:",sum(pred[:,np.newaxis]==y)[0]/5000*100,"%")
