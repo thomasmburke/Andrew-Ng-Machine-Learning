@@ -52,27 +52,5 @@ from predict import predict
 
 pred = predict(Theta1, Theta2, X)
 print("Training Set Accuracy:",sum(pred[:,np.newaxis]==y)[0]/5000*100,"%")
-"""
-
-%  To give you an idea of the network's output, you can also run
-%  through the examples one at the a time to see what it is predicting.
-
-%  Randomly permute examples
-rp = randperm(m);
-
-for i = 1:m
-    % Display 
-    fprintf('\nDisplaying Example Image\n');
-    displayData(X(rp(i), :));
-
-    pred = predict(Theta1, Theta2, X(rp(i),:));
-    fprintf('\nNeural Network Prediction: %d (digit %d)\n', pred, mod(pred, 10));
-    
-    % Pause with quit option
-    s = input('Paused - press enter to continue, q to exit:','s');
-    if s == 'q'
-      break
-    end
-end
-
-"""
+print("Training Set Accuracy:",np.sum(pred.reshape(5000,1)==y,axis=0)/5000*100,"%")
+print((pred[:,np.newaxis]==y)[0])
