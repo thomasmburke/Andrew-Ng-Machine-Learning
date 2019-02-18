@@ -10,4 +10,5 @@ def predictOneVsAll(all_theta, X):
     X = np.hstack((np.ones((m,1)),X))
 
     predictions = X @ all_theta.T
+    print(predictions)
     return np.argmax(predictions,axis=1)+1
