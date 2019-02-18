@@ -48,13 +48,11 @@ Theta2 = weights['Theta2']
 #  the labels. You will now implement the "predict" function to use the
 #  neural network to predict the labels of the training set. This lets
 #  you compute the training set accuracy.
+from predict import predict
+
+pred = predict(Theta1, Theta2, X)
+print("Training Set Accuracy:",sum(pred[:,np.newaxis]==y)[0]/5000*100,"%")
 """
-pred = predict(Theta1, Theta2, X);
-
-fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
 
 %  To give you an idea of the network's output, you can also run
 %  through the examples one at the a time to see what it is predicting.
