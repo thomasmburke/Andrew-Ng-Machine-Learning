@@ -4,4 +4,5 @@ Solutions to all the ML assignments in the Coursera. The Course assignments are 
 ## Assignment Status
 * Assignment 1: Linear Regression - Complete
 * Assignment 2: Logistic Regression - Complete
-* Assignment 3: Multi-class Classification and Neural Networks
+* Assignment 3: Multi-class Classification and Neural Network Forward Propogation- Complete
+* Assignment 4: Neural Network Back Propogation - Not Started
