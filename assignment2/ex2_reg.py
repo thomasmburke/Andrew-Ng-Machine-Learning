@@ -16,10 +16,6 @@
 %
 %  For this exercise, you will not need to change any code in this file,
 %  or any other files other than those mentioned above.
-%
-
-%% Initialization
-clear ; close all; clc
 
 %% Load Data
 %  The first two columns contains the X values and the third column
@@ -31,7 +27,13 @@ X = data[:,0:2]
 y = data[:,2].reshape(len(X),1)
 m = len(X)
 from plotData import x_plot
-x_plot(X, y)
+#x_plot(X, y)
+from sklearn.svm import SVC, SVR
+#... load the data into X,y
+model = SVR(kernel='poly', degree=6)
+model.fit(X,np.ravel(y))
+print(model.fit_status_)
+print(model.dual_coef_)
 
 """
 %% =========== Part 1: Regularized Logistic Regression ============
