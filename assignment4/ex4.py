@@ -34,8 +34,8 @@ num_labels = 10          # 10 labels, from 1 to 10
 print('Loading and Visualizing Data ..')
 import scipy.io
 data = scipy.io.loadmat('data/ex4data1.mat')
-X = data['X']
-y = data['y']
+X = data['X'] # 5000x400
+y = data['y'].reshape(5000,1) # 5000X1
 m, n = X.shape
 
 # Randomly select 100 data points to display
@@ -51,12 +51,11 @@ print('Loading Saved Neural Network Parameters ...')
 
 # Load the weights into variables Theta1 and Theta2
 weights = scipy.io.loadmat('data/ex4weights.mat')
-Theta1 = weights['Theta1']
-Theta2 = weights['Theta2']
-# Unroll parameters 
+Theta1 = weights['Theta1'] # 25x401
+Theta2 = weights['Theta2'] # 10x26
+# Unroll parameters
+nn_params = np.append(Theta1.flatten(),Theta2.flatten())
 """
-nn_params = [Theta1(:) ; Theta2(:)];
-
 %% ================ Part 3: Compute Cost (Feedforward) ================
 %  To the neural network, you should first start by implementing the
 %  feedforward part of the neural network that returns the cost only. You
@@ -68,15 +67,17 @@ nn_params = [Theta1(:) ; Theta2(:)];
 %  We suggest implementing the feedforward cost *without* regularization
 %  first so that it will be easier for you to debug. Later, in part 4, you
 %  will get to implement the regularized cost.
-%
-fprintf('\nFeedforward Using Neural Network ...\n')
+"""
 
-% Weight regularization parameter (we set this to 0 here).
-lambda = 0;
+print('Feedforward Using Neural Network ...')
 
-J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
-                   num_labels, X, y, lambda);
-
+# Weight regularization parameter (we set this to 0 here).
+lambdaValue = 0
+from nnCostFunction import nnCostFunction
+J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size,
+        num_labels, X, y, lambdaValue)
+print(J)
+"""
 fprintf(['Cost at parameters (loaded from ex4weights): %f '...
          '\n(this value should be about 0.287629)\n'], J);
 
