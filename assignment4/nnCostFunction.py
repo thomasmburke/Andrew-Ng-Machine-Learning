@@ -26,6 +26,10 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
     # Then sum up all of the class types error into one final cost
     for i in range(num_labels):
         J = J + sum(-y10[:,i] * np.log(a2[:,i]) - (1 - y10[:,i]) * np.log(1 - a2[:,i]))
-        print(J)
+    # cost without regularization
     J = 1/m * J
+    # Now to compute the cost with regularization
+    J_reg = np.sum(np.square(Theta1[:,1:])) + np.sum(np.square(Theta2[:,1:]))
+    J_reg = lambdaValue / (2 * m) * J_reg
+    J = J + J_reg
     return J

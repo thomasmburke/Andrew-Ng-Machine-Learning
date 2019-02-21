@@ -72,7 +72,7 @@ nn_params = np.append(Theta1.flatten(),Theta2.flatten())
 print('Feedforward Using Neural Network ...')
 
 # Weight regularization parameter (we set this to 0 here).
-lambdaValue = 0
+lambdaValue = 1
 from nnCostFunction import nnCostFunction
 J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size,
         num_labels, X, y, lambdaValue)
