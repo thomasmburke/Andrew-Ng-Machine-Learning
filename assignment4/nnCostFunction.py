@@ -22,4 +22,10 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
     print('y10[:,0][:,np.newaxis] shape: {}'.format(y10[:,0][:,np.newaxis].shape))
     for i in range(1, num_labels+1):
         y10[:,i-1][:,np.newaxis] = np.where(y==i,1,0)
-    return y10
+    # iterate through each classification type and get the error associated with that classification
+    # Then sum up all of the class types error into one final cost
+    for i in range(num_labels):
+        J = J + sum(-y10[:,i] * np.log(a2[:,i]) - (1 - y10[:,i]) * np.log(1 - a2[:,i]))
+        print(J)
+    J = 1/m * J
+    return J
