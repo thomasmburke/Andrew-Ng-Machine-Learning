@@ -71,56 +71,33 @@ nn_params = np.append(Theta1.flatten(),Theta2.flatten())
 
 print('Feedforward Using Neural Network ...')
 
+"""
+%% =============== Part 4: Implement Regularization ===============
+%  Once your cost function implementation is correct, you should now
+%  continue to implement the regularization with the cost.
+%
+"""
 # Weight regularization parameter (we set this to 0 here).
 lambdaValue = 1
 from nnCostFunction import nnCostFunction
 J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size,
         num_labels, X, y, lambdaValue)
 print(J)
+print('expected cost: 0.383770')
 """
-fprintf(['Cost at parameters (loaded from ex4weights): %f '...
-         '\n(this value should be about 0.287629)\n'], J);
-
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
-
-%% =============== Part 4: Implement Regularization ===============
-%  Once your cost function implementation is correct, you should now
-%  continue to implement the regularization with the cost.
-%
-
-fprintf('\nChecking Cost Function (w/ Regularization) ... \n')
-
-% Weight regularization parameter (we set this to 1 here).
-lambda = 1;
-
-J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
-                   num_labels, X, y, lambda);
-
-fprintf(['Cost at parameters (loaded from ex4weights): %f '...
-         '\n(this value should be about 0.383770)\n'], J);
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
-
 %% ================ Part 5: Sigmoid Gradient  ================
 %  Before you start implementing the neural network, you will first
 %  implement the gradient for the sigmoid function. You should complete the
 %  code in the sigmoidGradient.m file.
 %
+"""
+from sigmoid import sigmoid_gradient
+print('Evaluating sigmoid gradient...')
 
-fprintf('\nEvaluating sigmoid gradient...\n')
-
-g = sigmoidGradient([-1 -0.5 0 0.5 1]);
-fprintf('Sigmoid gradient evaluated at [-1 -0.5 0 0.5 1]:\n  ');
-fprintf('%f ', g);
-fprintf('\n\n');
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
-
+g = sigmoid_gradient(np.array([-1, -0.5, 0, 0.5, 1]))
+print('Sigmoid gradient evaluated at [-1 -0.5 0 0.5 1]:')
+print(g)
+"""
 %% ================ Part 6: Initializing Pameters ================
 %  In this part of the exercise, you will be starting to implment a two
 %  layer neural network that classifies digits. You will start by

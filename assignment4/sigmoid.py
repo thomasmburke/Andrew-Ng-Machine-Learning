@@ -5,4 +5,4 @@ def sigmoid(z):
 
 
 def sigmoid_gradient(z):
-    return (sigmoid(z) * (1-sigmoid))
+    return (sigmoid(z) * (1-sigmoid(z)))
