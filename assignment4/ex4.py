@@ -80,10 +80,10 @@ print('Feedforward Using Neural Network ...')
 # Weight regularization parameter (we set this to 0 here).
 lambdaValue = 1
 from nnCostFunction import nnCostFunction
-J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size,
-        num_labels, X, y, lambdaValue)
-print(J)
-print('expected cost: 0.383770')
+#J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size,
+#        num_labels, X, y, lambdaValue)
+#print(J)
+#print('expected cost: 0.383770')
 """
 %% ================ Part 5: Sigmoid Gradient  ================
 %  Before you start implementing the neural network, you will first
@@ -103,38 +103,40 @@ print(g)
 %  layer neural network that classifies digits. You will start by
 %  implementing a function to initialize the weights of the neural network
 %  (randInitializeWeights.m)
+"""
+print('Initializing Neural Network Parameters ...')
+from randInitializeWeights import randInitializeWeights
+initial_Theta1 = randInitializeWeights(input_layer_size, hidden_layer_size)
+initial_Theta2 = randInitializeWeights(hidden_layer_size, num_labels)
 
-fprintf('\nInitializing Neural Network Parameters ...\n')
-
-initial_Theta1 = randInitializeWeights(input_layer_size, hidden_layer_size);
-initial_Theta2 = randInitializeWeights(hidden_layer_size, num_labels);
-
-% Unroll parameters
-initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
-
-
+# Unroll parameters
+initial_nn_params = np.append(Theta1.flatten(), Theta2.flatten())
+"""
 %% =============== Part 7: Implement Backpropagation ===============
 %  Once your cost matches up with ours, you should proceed to implement the
 %  backpropagation algorithm for the neural network. You should add to the
 %  code you've written in nnCostFunction.m to return the partial
 %  derivatives of the parameters.
 %
-fprintf('\nChecking Backpropagation... \n');
+"""
+print('Checking Backpropagation... ')
 
-%  Check gradients by running checkNNGradients
-checkNNGradients;
-
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
-
-
+J, grad1, grad2, reg_J, grad1_reg, grad2_reg = nnCostFunction(initial_nn_params, input_layer_size, hidden_layer_size,
+        num_labels, X, y, lambdaValue)
+print(grad1)
+"""
+# Check gradients by running checkNNGradients
+from checkNNGradients import checkNNGradients
+checkNNGradients()
+"""
+"""
 %% =============== Part 8: Implement Regularization ===============
 %  Once your backpropagation implementation is correct, you should now
 %  continue to implement the regularization with the cost and gradient.
 %
-
-fprintf('\nChecking Backpropagation (w/ Regularization) ... \n')
-
+"""
+# print('Checking Backpropagation (w/ Regularization) ... ')
+"""
 %  Check gradients by running checkNNGradients
 lambda = 3;
 checkNNGradients(lambda);
