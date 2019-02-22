@@ -26,7 +26,7 @@ print('Loading and Visualizing Data ...')
 # Load from ex5data1: 
 # You will have X, y, Xval, yval, Xtest, ytest in your environment
 
-data = scipy.io.loadmat('ex5data1.mat')
+data = scipy.io.loadmat('data/ex5data1.mat')
 X = data['X']
 y = data['y']
 Xtest = data['Xtest']
@@ -34,15 +34,16 @@ ytest = data['ytest']
 Xval = data['Xval']
 yval = data['yval']
 m, n = X.shape
+import scipy.stats
+X_description = scipy.stats.describe(X)
+print(X_description)
+# Plot training data
+import matplotlib.pyplot as plt
+plt.scatter(X, y, marker='x', c='blue')
+plt.xlabel('Change in water level (x)')
+plt.ylabel('Water flowing out of the dam (y)')
+plt.show()
 """
-% Plot training data
-plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
-xlabel('Change in water level (x)');
-ylabel('Water flowing out of the dam (y)');
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
 %% =========== Part 2: Regularized Linear Regression Cost =============
 %  You should now implement the cost function for regularized linear 
 %  regression. 
