@@ -42,22 +42,19 @@ import matplotlib.pyplot as plt
 plt.scatter(X, y, marker='x', c='blue')
 plt.xlabel('Change in water level (x)')
 plt.ylabel('Water flowing out of the dam (y)')
-plt.show()
+#plt.show()
 """
 %% =========== Part 2: Regularized Linear Regression Cost =============
 %  You should now implement the cost function for regularized linear 
 %  regression. 
 %
+"""
 
-theta = [1 ; 1];
-J = linearRegCostFunction([ones(m, 1) X], y, theta, 1);
-
-fprintf(['Cost at theta = [1 ; 1]: %f '...
-         '\n(this value should be about 303.993192)\n'], J);
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
+theta = np.array([[1], [1]])
+from linearRegCostFunction import linearRegCostFunction
+J = linearRegCostFunction(X, y, theta, 1)
+print('Cost at theta = [1 ; 1]: {} \n(this value should be about 303.993192)\n'.format(J))
+"""
 %% =========== Part 3: Regularized Linear Regression Gradient =============
 %  You should now implement the gradient for regularized linear 
 %  regression.
