@@ -83,7 +83,12 @@ plt.show()
 plt.scatter(X, y, marker='x', c='blue')
 plt.xlabel('Change in water level (x)')
 plt.ylabel('Water flowing out of the dam (y)')
-#plt.show()
+x_value=[x for x in range(-50,40)]
+y_value=[y_hat*theta[1]+theta[0] for y_hat in x_value]
+plt.plot(x_value,y_value,color="r")
+plt.ylim(-5,40)
+plt.xlim(-50,40)
+plt.show()
 """
 #  Plot fit over the data
 plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
