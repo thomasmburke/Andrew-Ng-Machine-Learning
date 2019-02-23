@@ -38,11 +38,6 @@ import scipy.stats
 X_description = scipy.stats.describe(X)
 print(X_description)
 # Plot training data
-import matplotlib.pyplot as plt
-plt.scatter(X, y, marker='x', c='blue')
-plt.xlabel('Change in water level (x)')
-plt.ylabel('Water flowing out of the dam (y)')
-#plt.show()
 """
 %% =========== Part 2: Regularized Linear Regression Cost =============
 %  You should now implement the cost function for regularized linear 
@@ -79,6 +74,16 @@ print('theta\n')
 print(theta)
 #print('J_Hist:\n')
 #print(J_Hist)
+
+import matplotlib.pyplot as plt
+plt.plot(J_Hist)
+plt.xlabel('num iterations')
+plt.ylabel('cost or J(THETA)')
+plt.show()
+plt.scatter(X, y, marker='x', c='blue')
+plt.xlabel('Change in water level (x)')
+plt.ylabel('Water flowing out of the dam (y)')
+#plt.show()
 """
 #  Plot fit over the data
 plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
