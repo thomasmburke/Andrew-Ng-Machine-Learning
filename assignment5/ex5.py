@@ -83,38 +83,34 @@ plt.show()
 plt.scatter(X, y, marker='x', c='blue')
 plt.xlabel('Change in water level (x)')
 plt.ylabel('Water flowing out of the dam (y)')
-x_value=[x for x in range(-50,40)]
-y_value=[y_hat*theta[1]+theta[0] for y_hat in x_value]
+x_value = np.linspace(start=np.min(X),stop=np.max(X))
+y_value = x_value*theta[1]+theta[0]
+#x_value=[x for x in range(-50,40)]
+#y_value=[y_hat*theta[1]+theta[0] for y_hat in x_value]
 plt.plot(x_value,y_value,color="r")
 plt.ylim(-5,40)
 plt.xlim(-50,40)
 plt.show()
 """
-#  Plot fit over the data
-plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
-xlabel('Change in water level (x)');
-ylabel('Water flowing out of the dam (y)');
-hold on;
-plot(X, [ones(m, 1) X]*theta, '--', 'LineWidth', 2)
-hold off;
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
-
 %% =========== Part 5: Learning Curve for Linear Regression =============
 %  Next, you should implement the learningCurve function. 
 %
 %  Write Up Note: Since the model is underfitting the data, we expect to
 %                 see a graph with "high bias" -- Figure 3 in ex5.pdf 
 %
-
-lambda = 0;
-[error_train, error_val] = ...
-    learningCurve([ones(m, 1) X], y, ...
-                  [ones(size(Xval, 1), 1) Xval], yval, ...
-                  lambda);
-
+"""
+from learningCurve import learningCurve
+lambdaValue = 0
+#Xval_1 = np.hstack((np.ones((21,1)),Xval))
+error_train, error_val =  learningCurve(X, y, Xval, yval, lambdaValue)
+plt.plot(range(12),error_train,label="Train")
+plt.plot(range(12),error_val,label="Cross Validation",color="r")
+plt.title("Learning Curve for Linear Regression")
+plt.xlabel("Number of training examples")
+plt.ylabel("Error")
+plt.legend()
+plt.show()
+"""
 plot(1:m, error_train, 1:m, error_val);
 title('Learning curve for linear regression')
 legend('Train', 'Cross Validation')

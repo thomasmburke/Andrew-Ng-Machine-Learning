@@ -5,7 +5,7 @@ def trainLinearReg(X, y, lambdaValue):
     #initialize theta
     m, n = X.shape
     theta = np.zeros((n+1,1))
-    num_iters = 4000
+    num_iters = 3000
     alpha = .001
     J_Hist = []
     for i in range(num_iters):

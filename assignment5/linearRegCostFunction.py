@@ -5,6 +5,8 @@ def linearRegCostFunction(X, y, theta, lambdaValue):
     m, n = X.shape
     X = np.hstack((np.ones((m,1)),X))
     J = 0
+    print('shape of X: {}'.format(X.shape))
+    print('shape of theta: {}'.format(theta.shape))
     J = sum(np.square((X @ theta) - y))
     J = J * (1/(2*m))
     # remove bias unit in theta
