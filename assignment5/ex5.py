@@ -119,12 +119,32 @@ p = 8
 
 # Map X onto Polynomial Features and Normalize
 X_poly = polyFeatures(X, p)
-print(X_poly)
-print(X_poly.shape)
-"""
-[X_poly, mu, sigma] = featureNormalize(X_poly);  % Normalize
-X_poly = [ones(m, 1), X_poly];                   % Add Ones
+from sklearn.preprocessing import StandardScaler
+sc_X=StandardScaler()
+X_poly=sc_X.fit_transform(X_poly)
+#X_poly = np.hstack((np.ones((X_poly.shape[0],1)),X_poly))
+# Map Xtest onto polynomial features and normalize
+X_poly_test = polyFeatures(Xtest, p)
+X_poly_test = sc_X.transform(X_poly_test)
+# Map Xval onto polynomial features and normalize
+X_poly_val = polyFeatures(Xval, p)
+X_poly_val = sc_X.transform(X_poly_val)
 
+theta_poly, J_Hist = trainLinearReg(X_poly, y, 0, .3, 20000)
+plt.scatter(X,y,marker="x",color="r")
+plt.xlabel("Change in water level")
+plt.ylabel("Water flowing out of the dam")
+x_value=np.linspace(-55,65,2400)
+
+# Map the X values and normalize
+x_value_poly = polyFeatures(x_value[:,np.newaxis], p)
+x_value_poly = sc_X.transform(x_value_poly)
+x_value_poly = np.hstack((np.ones((x_value_poly.shape[0],1)),x_value_poly))
+y_value= x_value_poly @ theta_poly
+plt.plot(x_value,y_value,"--",color="b")
+plt.show()
+
+"""
 % Map X_poly_test and normalize (using mu and sigma)
 X_poly_test = polyFeatures(Xtest, p);
 X_poly_test = bsxfun(@minus, X_poly_test, mu);
