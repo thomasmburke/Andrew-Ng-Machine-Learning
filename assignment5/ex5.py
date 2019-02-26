@@ -101,7 +101,6 @@ plt.show()
 """
 from learningCurve import learningCurve
 lambdaValue = 0
-#Xval_1 = np.hstack((np.ones((21,1)),Xval))
 error_train, error_val =  learningCurve(X, y, Xval, yval, lambdaValue)
 plt.plot(range(12),error_train,label="Train")
 plt.plot(range(12),error_val,label="Cross Validation",color="r")
@@ -111,30 +110,18 @@ plt.ylabel("Error")
 plt.legend()
 plt.show()
 """
-plot(1:m, error_train, 1:m, error_val);
-title('Learning curve for linear regression')
-legend('Train', 'Cross Validation')
-xlabel('Number of training examples')
-ylabel('Error')
-axis([0 13 0 150])
-
-fprintf('# Training Examples\tTrain Error\tCross Validation Error\n');
-for i = 1:m
-    fprintf('  \t%d\t\t%f\t%f\n', i, error_train(i), error_val(i));
-end
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
 %% =========== Part 6: Feature Mapping for Polynomial Regression =============
 %  One solution to this is to use polynomial regression. You should now
 %  complete polyFeatures to map each example into its powers
-%
+"""
+from polyFeatures import polyFeatures
+p = 8
 
-p = 8;
-
-% Map X onto Polynomial Features and Normalize
-X_poly = polyFeatures(X, p);
+# Map X onto Polynomial Features and Normalize
+X_poly = polyFeatures(X, p)
+print(X_poly)
+print(X_poly.shape)
+"""
 [X_poly, mu, sigma] = featureNormalize(X_poly);  % Normalize
 X_poly = [ones(m, 1), X_poly];                   % Add Ones
 
