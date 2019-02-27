@@ -37,11 +37,6 @@ m, n = X.shape
 pos , neg= (y==1), (y==0)
 plt.scatter(X[pos[:,0],0],X[pos[:,0],1],c="r",marker="+", label='Admitted')
 plt.scatter(X[neg[:,0],0],X[neg[:,0],1],marker="o",s=10, label='Not Admitted')
-#x_value= np.array([np.min(X[:,1]),np.max(X[:,1])])
-#y_value=-(theta[0] +theta[1]*x_value)/theta[2]
-#x_value = np.linspace(start=np.min(X[:,1]), stop=(np.max(X[:,1])))
-#y_value = -(theta[1]/theta[2]) * x_value - theta[0] / theta[2]
-#plt.plot(x_value,y_value, "r")
 plt.xlabel("Exam 1 score")
 plt.ylabel("Exam 2 score")
 plt.legend(loc=0)
@@ -54,53 +49,35 @@ plt.show()
 """
 print('Training Linear SVM ...')
 from sklearn.svm import SVC
-classifier = SVC(C=1, kernel='linear')
+classifier = SVC(C=100, kernel='linear')
 classifier.fit(X,np.ravel(y))
 plt.figure(figsize=(8,6))
 plt.scatter(X[pos[:,0],0],X[pos[:,0],1],c="r",marker="+",s=50)
 plt.scatter(X[neg[:,0],0],X[neg[:,0],1],c="y",marker="o",s=50)
 # plotting the decision boundary
-X_1,X_2 = np.meshgrid(np.linspace(X[:,0].min(),X[:,1].max(),num=100),np.linspace(X[:,1].min(),X[:,1].max(),num=100))
+# use linspace to generate 100 points between the min and max for both x1 and x2
+# then use meshgrid to create a 2D linspace (grid) of points at each of the points provided by linspace
+X_1,X_2 = np.meshgrid(np.linspace(X[:,0].min(),X[:,0].max(),num=100),np.linspace(X[:,1].min(),X[:,1].max(),num=100))
 plt.contour(X_1,X_2,classifier.predict(np.array([X_1.ravel(),X_2.ravel()]).T).reshape(X_1.shape),1,colors="b")
 plt.xlim(0,4.5)
 plt.ylim(1.5,5)
 plt.show()
-# You should try to change the C value below and see how the decision
-# boundary varies (e.g., try C = 1000)
 """
-C = 1;
-model = svmTrain(X, y, C, @linearKernel, 1e-3, 20);
-visualizeBoundaryLinear(X, y, model);
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
-%% =============== Part 3: Implementing Gaussian Kernel ===============
-%  You will now implement the Gaussian kernel to use
-%  with the SVM. You should complete the code in gaussianKernel.m
-%
-fprintf('\nEvaluating the Gaussian Kernel ...\n')
-
-x1 = [1 2 1]; x2 = [0 4 -1]; sigma = 2;
-sim = gaussianKernel(x1, x2, sigma);
-
-fprintf(['Gaussian Kernel between x1 = [1; 2; 1], x2 = [0; 4; -1], sigma = %f :' ...
-         '\n\t%f\n(for sigma = 2, this value should be about 0.324652)\n'], sigma, sim);
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
 %% =============== Part 4: Visualizing Dataset 2 ================
 %  The following code will load the next dataset into your environment and 
 %  plot the data. 
-%
+"""
 
-fprintf('Loading and Visualizing Data ...\n')
+print('Loading and Visualizing Data2 ...')
 
-% Load from ex6data2: 
-% You will have X, y in your environment
-load('ex6data2.mat');
-
+# Load from ex6data2: 
+# You will have X, y in your environment
+data2 = loadmat('data/ex6data2.mat')
+# data set has 863 rows and 2 features
+X = data2['X']
+y = data2['y']
+m, n = X.shape
+"""
 % Plot training data
 plotData(X, y);
 
