@@ -35,12 +35,12 @@ m, n = X.shape
 
 # Plot training data
 pos , neg= (y==1), (y==0)
-plt.scatter(X[pos[:,0],0],X[pos[:,0],1],c="r",marker="+", label='Admitted')
-plt.scatter(X[neg[:,0],0],X[neg[:,0],1],marker="o",s=10, label='Not Admitted')
-plt.xlabel("Exam 1 score")
-plt.ylabel("Exam 2 score")
-plt.legend(loc=0)
-plt.show()
+#plt.scatter(X[pos[:,0],0],X[pos[:,0],1],c="r",marker="+", label='Admitted')
+#plt.scatter(X[neg[:,0],0],X[neg[:,0],1],marker="o",s=10, label='Not Admitted')
+#plt.xlabel("Exam 1 score")
+#plt.ylabel("Exam 2 score")
+#plt.legend(loc=0)
+#plt.show()
 """
 %% ==================== Part 2: Training Linear SVM ====================
 %  The following code will train a linear SVM on the dataset and plot the
@@ -96,7 +96,7 @@ print('Training SVM with RBF Kernel (this may take 1 to 2 minutes) ...')
 
 # SVM with a guassian kernel
 # rbf = Radial basis function = gaussian kernel
-# by default gamma = 'auto' whish is 1/n for our use we will use 30
+# by default gamma = 'auto' which is 1/n for our use we will use 30
 # gamma is effectively equal to 1/sigma
 classifier2 = SVC(C=1, kernel='rbf',gamma=30)
 classifier2.fit(X2, np.ravel(y2))
@@ -116,12 +116,13 @@ print('Loading and Visualizing Data ...')
 data3 = loadmat('data/ex6data3.mat')
 X3 = data3['X']
 y3 = data3['y']
+X3val = data3['Xval']
+y3val = data3['yval']
 m, n = X.shape
 plt.figure(figsize=(8,6))
 pos, neg = (y3==1), (y3==0)
 plt.scatter(X3[pos[:,0],0],X3[pos[:,0],1],c="r",marker="+",s=50)
 plt.scatter(X3[neg[:,0],0],X3[neg[:,0],1],c="y",marker="o",s=50)
-plt.show()
 
 """
 %% ========== Part 7: Training SVM with RBF Kernel (Dataset 3) ==========
@@ -130,11 +131,12 @@ plt.show()
 %  different values of C and sigma here.
 % 
 """
-"""
-% Try different SVM Parameters here
-[C, sigma] = dataset3Params(X, y, Xval, yval);
+from dataset3Params import dataset3Params
+vals = [.01, .03, .1, .3, 1, 3, 10, 30]
+C, gamma = dataset3Params(X3, y3, X3val, y3val, vals)
 
-% Train the SVM
-model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
-visualizeBoundary(X, y, model);
-"""
+classifier3 = SVC(C=C, gamma=gamma)
+classifier3.fit(X3, np.ravel(y3))
+X_1,X_2 = np.meshgrid(np.linspace(X3[:,0].min(),X3[:,0].max(),num=100),np.linspace(X3[:,1].min(),X3[:,1].max(),num=100))
+plt.contour(X_1,X_2,classifier3.predict(np.array([X_1.ravel(),X_2.ravel()]).T).reshape(X_1.shape),1,colors="b")
+plt.show()
