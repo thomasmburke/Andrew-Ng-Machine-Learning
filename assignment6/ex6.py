@@ -117,6 +117,12 @@ data3 = loadmat('data/ex6data3.mat')
 X3 = data3['X']
 y3 = data3['y']
 m, n = X.shape
+plt.figure(figsize=(8,6))
+pos, neg = (y3==1), (y3==0)
+plt.scatter(X3[pos[:,0],0],X3[pos[:,0],1],c="r",marker="+",s=50)
+plt.scatter(X3[neg[:,0],0],X3[neg[:,0],1],c="y",marker="o",s=50)
+plt.show()
+
 """
 %% ========== Part 7: Training SVM with RBF Kernel (Dataset 3) ==========
 
