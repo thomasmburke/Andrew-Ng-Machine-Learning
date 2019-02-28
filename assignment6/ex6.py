@@ -83,7 +83,7 @@ plt.figure(figsize=(8,6))
 pos, neg = (y2==1), (y2==0)
 plt.scatter(X2[pos[:,0],0],X2[pos[:,0],1],c="r",marker="+",s=50)
 plt.scatter(X2[neg[:,0],0],X2[neg[:,0],1],c="y",marker="o",s=50)
-plt.show()
+#plt.show()
 
 """
 %% ========== Part 5: Training SVM with RBF Kernel (Dataset 2) ==========
@@ -100,6 +100,9 @@ print('Training SVM with RBF Kernel (this may take 1 to 2 minutes) ...')
 # gamma is effectively equal to 1/sigma
 classifier2 = SVC(C=1, kernel='rbf',gamma=30)
 classifier2.fit(X2, np.ravel(y2))
+X_1,X_2 = np.meshgrid(np.linspace(X2[:,0].min(),X2[:,0].max(),num=100),np.linspace(X2[:,1].min(),X2[:,1].max(),num=100))
+plt.contour(X_1,X_2,classifier2.predict(np.array([X_1.ravel(),X_2.ravel()]).T).reshape(X_1.shape),1,colors="b")
+plt.show()
 """
 %% =============== Part 6: Visualizing Dataset 3 ================
 %  The following code will load the next dataset into your environment and 
