@@ -74,9 +74,21 @@ print('Loading and Visualizing Data2 ...')
 # You will have X, y in your environment
 data2 = loadmat('data/ex6data2.mat')
 # data set has 863 rows and 2 features
-X = data2['X']
-y = data2['y']
-m, n = X.shape
+X2 = data2['X']
+y2 = data2['y']
+m, n = X2.shape
+
+#plot nonlinear distribution
+plt.figure(figsize=(8,6))
+pos, neg = (y2==1), (y2==0)
+plt.scatter(X2[pos[:,0],0],X2[pos[:,0],1],c="r",marker="+",s=50)
+plt.scatter(X2[neg[:,0],0],X2[neg[:,0],1],c="y",marker="o",s=50)
+plt.show()
+
+# SVM with a guassian kernel
+# rbf = Radial basis function = gaussian kernel
+classifier2 = SVC(C=1, kernel='rbf',gamma='auto')
+classifier2.fit(X2, np.ravel(y2))
 """
 % Plot training data
 plotData(X, y);
