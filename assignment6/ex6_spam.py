@@ -64,36 +64,28 @@ classifier = SVC(C=0.1, kernel='linear')
 classifier.fit(X,np.ravel(y))
 print("Training Accuracy:",(classifier.score(X,y.ravel()))*100,"%")
 """
-model = svmTrain(X, y, C, @linearKernel);
-
-p = svmPredict(model, X);
-
-fprintf('Training Accuracy: %f\n', mean(double(p == y)) * 100);
-
 %% =================== Part 4: Test Spam Classification ================
 %  After training the classifier, we can evaluate it on a test set. We have
 %  included a test set in spamTest.mat
+"""
+#Load the test dataset
+# You will have Xtest, ytest in your environment
+testData = loadmat('data/spamTest.mat')
+X_test = testData['Xtest']
+y_test = testData['ytest']
 
-% Load the test dataset
-% You will have Xtest, ytest in your environment
-load('spamTest.mat');
+print('Evaluating the trained Linear SVM on a test set ...')
+print("Training Accuracy:",(classifier.score(X_test,y_test.ravel()))*100,"%")
 
-fprintf('\nEvaluating the trained Linear SVM on a test set ...\n')
-
-p = svmPredict(model, Xtest);
-
-fprintf('Test Accuracy: %f\n', mean(double(p == ytest)) * 100);
-pause;
-
-
+"""
 %% ================= Part 5: Top Predictors of Spam ====================
 %  Since the model we are training is a linear SVM, we can inspect the
 %  weights learned by the model to understand better how it is determining
 %  whether an email is spam or not. The following code finds the words with
 %  the highest weights in the classifier. Informally, the classifier
 %  'thinks' that these words are the most likely indicators of spam.
-%
-
+"""
+"""
 % Sort the weights and obtin the vocabulary list
 [weight, idx] = sort(model.w, 'descend');
 vocabList = getVocabList();
