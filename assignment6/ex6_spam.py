@@ -24,48 +24,33 @@ import numpy as np
 %  for a given email.
 """
 print('Preprocessing sample email (emailSample1.txt)')
-
-# Extract Features
-#file_contents = readFile('emailSample1.txt');
-#word_indices  = processEmail(file_contents);
-
 with open('data/emailSample1.txt', mode='r') as myFile:
     emailSample1 = myFile.read()
-from processEmail import processEmail
+from processEmail import processEmail, get_vocab_list
 processedEmail1 = processEmail(emailSample1)
 print(processedEmail1)
+uniqueWords = len(get_vocab_list())
+print('number of unique words: {}'.format(uniqueWords))
 """
-# Print Stats
-fprintf('Word Indices: \n');
-fprintf(' %d', word_indices);
-fprintf('\n\n');
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
 %% ==================== Part 2: Feature Extraction ====================
 %  Now, you will convert each email into a vector of features in R^n. 
 %  You should complete the code in emailFeatures.m to produce a feature
 %  vector for a given email.
+"""
+print('Extracting features from sample email (emailSample1.txt)')
+from emailFeatures import emailFeatures
+# Extract Features
+features = emailFeatures(processedEmail1)
 
-fprintf('\nExtracting features from sample email (emailSample1.txt)\n');
-
-% Extract Features
-file_contents = readFile('emailSample1.txt');
-word_indices  = processEmail(file_contents);
-features      = emailFeatures(word_indices);
-
-% Print Stats
-fprintf('Length of feature vector: %d\n', length(features));
-fprintf('Number of non-zero entries: %d\n', sum(features > 0));
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
-
+# Print Stats
+print('Length of feature vector: {}'.format(len(features)))
+print('Number of non-zero entries: {}'.format(sum(features > 0)))
+"""
 %% =========== Part 3: Train Linear SVM for Spam Classification ========
 %  In this section, you will train a linear classifier to determine if an
 %  email is Spam or Not-Spam.
-
+"""
+"""
 % Load the Spam Email dataset
 % You will have X, y in your environment
 load('spamTrain.mat');
