@@ -31,8 +31,8 @@ with open('data/emailSample1.txt', mode='r') as myFile:
 from processEmail import processEmail, get_vocab_list
 processedEmail1 = processEmail(emailSample1)
 print(processedEmail1)
-uniqueWords = len(get_vocab_list())
-print('number of unique words: {}'.format(uniqueWords))
+uniqueWords = get_vocab_list()
+#print('number of unique words: {}'.format(uniqueWords))
 """
 %% ==================== Part 2: Feature Extraction ====================
 %  Now, you will convert each email into a vector of features in R^n. 
@@ -85,8 +85,24 @@ print("Training Accuracy:",(classifier.score(X_test,y_test.ravel()))*100,"%")
 %  the highest weights in the classifier. Informally, the classifier
 %  'thinks' that these words are the most likely indicators of spam.
 """
+weights = classifier.coef_[0]
+weights = np.hstack((np.arange(1,1900).reshape(1899,1),weights.reshape(1899,1)))
+print(weights)
+print(weights.shape)
+indexes = weights[weights[:,1].argsort()][-15:,0]
+print(indexes)
+intIndexes = []
+for index in indexes:
+    intIndexes.append(int(index))
+print(intIndexes)
+topSpamWords = []
+for word, index in uniqueWords.items():
+    for intIndex in intIndexes:
+        if str(intIndex) == str(index):
+            topSpamWords.append(word)
+print(topSpamWords)
 """
-% Sort the weights and obtin the vocabulary list
+# Sort the weights and obtin the vocabulary list
 [weight, idx] = sort(model.w, 'descend');
 vocabList = getVocabList();
 
