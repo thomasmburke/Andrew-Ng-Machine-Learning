@@ -31,7 +31,9 @@ print('Preprocessing sample email (emailSample1.txt)')
 
 with open('data/emailSample1.txt', mode='r') as myFile:
     emailSample1 = myFile.read()
-print(emailSample1)
+from processEmail import processEmail
+processedEmail1 = processEmail(emailSample1)
+print(processedEmail1)
 """
 # Print Stats
 fprintf('Word Indices: \n');
