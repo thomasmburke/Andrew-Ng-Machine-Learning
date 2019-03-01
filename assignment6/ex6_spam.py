@@ -1,4 +1,6 @@
 import numpy as np
+from scipy.io import loadmat
+from sklearn.svm import SVC
 """
 %% Machine Learning Online Class
 %  Exercise 6 | Spam Classification with SVMs
@@ -50,15 +52,18 @@ print('Number of non-zero entries: {}'.format(sum(features > 0)))
 %  In this section, you will train a linear classifier to determine if an
 %  email is Spam or Not-Spam.
 """
+# Load the Spam Email dataset
+# You will have X, y in your environment
+data = loadmat('data/spamTrain.mat')
+X = data['X']
+y = data['y']
+m, n = X.shape
+print('Training Linear SVM (Spam Classification)')
+print('(this may take 1 to 2 minutes) ...')
+classifier = SVC(C=0.1, kernel='linear')
+classifier.fit(X,np.ravel(y))
+print("Training Accuracy:",(classifier.score(X,y.ravel()))*100,"%")
 """
-% Load the Spam Email dataset
-% You will have X, y in your environment
-load('spamTrain.mat');
-
-fprintf('\nTraining Linear SVM (Spam Classification)\n')
-fprintf('(this may take 1 to 2 minutes) ...\n')
-
-C = 0.1;
 model = svmTrain(X, y, C, @linearKernel);
 
 p = svmPredict(model, X);
