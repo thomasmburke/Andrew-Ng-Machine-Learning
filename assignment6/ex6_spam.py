@@ -24,12 +24,16 @@ import numpy as np
 %  for a given email.
 """
 print('Preprocessing sample email (emailSample1.txt)')
-"""
-# Extract Features
-file_contents = readFile('emailSample1.txt');
-word_indices  = processEmail(file_contents);
 
-% Print Stats
+# Extract Features
+#file_contents = readFile('emailSample1.txt');
+#word_indices  = processEmail(file_contents);
+
+with open('data/emailSample1.txt', mode='r') as myFile:
+    emailSample1 = myFile.read()
+print(emailSample1)
+"""
+# Print Stats
 fprintf('Word Indices: \n');
 fprintf(' %d', word_indices);
 fprintf('\n\n');
