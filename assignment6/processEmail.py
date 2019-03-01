@@ -3,6 +3,9 @@ from nltk.stem import PorterStemmer
 
 def processEmail(email):
     email = email.lower()
+    # Replace all numbers with 'number'
+    email = re.sub(r'[0-9]+', 'number', email)
+    email = re.sub(r'(http|https)://[^\s]*','httpaddr', email)
     words = get_vocab_list()
     return email
 
