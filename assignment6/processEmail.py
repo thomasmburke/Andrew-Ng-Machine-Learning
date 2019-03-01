@@ -18,6 +18,10 @@ def processEmail(email):
         email = email.replace(str(char),'')
     # Remove newline characters and replace with space
     email = email.replace("\n"," ")
+    # Stem the word
+    ps = PorterStemmer()
+    email = [ps.stem(token) for token in email.split(' ')]
+    email = ' '.join(email)
     words = get_vocab_list()
     return email
 
