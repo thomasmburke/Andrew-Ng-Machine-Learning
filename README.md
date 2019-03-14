@@ -9,4 +9,4 @@ Solutions to all the ML assignments in the Coursera. The Course assignments are 
 * Assignment 5: Regularized Linear Regression and Bias/Variance - Complete
 * Assignment 6: Support Vector Machines - Complete
 * Assignment 7: K-Means Clustering and PCA - Completes
-* Assignment 8: Anamoly Detection and Recommender Systems - Not Started
+* Assignment 8: Anamoly Detection and Recommender Systems - Complete
